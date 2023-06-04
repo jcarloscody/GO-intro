@@ -53,7 +53,11 @@ func controler(comando int) {
 
 func requisicao() {
 	site := "https://www.youtube.com/watch?v=ipHf-wprgoQ&ab_channel=ADPBTemploCentral"
-	res, error := http.Get(site)
+	res, _ := http.Get(site)
 	fmt.Println("res::  ", res.Header)
-	fmt.Println("error  ::", error)
+	// fmt.Println("error  ::", error)
+}
+
+func doisReturn() (string, int) {
+	return "ola", 0
 }
