@@ -6,10 +6,12 @@ import "os"
 import "net/http"
 
 func main() {
-	home()
-	comando := leCom()
-	controler(comando)
-	requisicao()
+	for {
+		home()
+		comando := leCom()
+		controler(comando)
+		requisicao()
+	}
 
 }
 
@@ -54,7 +56,7 @@ func controler(comando int) {
 func requisicao() {
 	site := "https://www.youtube.com/watch?v=ipHf-wprgoQ&ab_channel=ADPBTemploCentral"
 	res, _ := http.Get(site)
-	fmt.Println("res::  ", res.Header)
+	fmt.Println("res::  ", res.StatusCode)
 	// fmt.Println("error  ::", error)
 }
 
