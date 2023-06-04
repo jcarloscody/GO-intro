@@ -9,4 +9,5 @@
 go version
 go build file.go
 go run file.go
+go work init
 ```
