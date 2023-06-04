@@ -3,11 +3,13 @@ package main
 import "fmt"
 import "reflect"
 import "os"
+import "net/http"
 
 func main() {
 	home()
 	comando := leCom()
 	controler(comando)
+	requisicao()
 
 }
 
@@ -47,4 +49,11 @@ func controler(comando int) {
 	default:
 		os.Exit(0)
 	}
+}
+
+func requisicao() {
+	site := "https://www.youtube.com/watch?v=ipHf-wprgoQ&ab_channel=ADPBTemploCentral"
+	res, error := http.Get(site)
+	fmt.Println("res::  ", res.Header)
+	fmt.Println("error  ::", error)
 }
