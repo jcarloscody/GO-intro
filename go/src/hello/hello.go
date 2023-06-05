@@ -4,6 +4,9 @@ import "fmt"
 import "reflect"
 import "os"
 import "net/http"
+import "time"
+
+const monitoramento = 5
 
 func main() {
 	for {
@@ -54,10 +57,26 @@ func controler(comando int) {
 }
 
 func requisicao() {
+	var arraySite [3]string
+	arraySite[0] = "https://cursos.alura.com.br/formacao-go"
+
+	sliceSites := []string{"https://www.youtube.com/watch?v=ipHf-wprgoQ&ab_channel=ADPBTemploCentral", "https://www.youtube.com/watch?v=ipHf-wprgoQ&ab_channel=ADPBTemploCentral", "https://www.youtube.com/watch?v=ipHf-wprgoQ&ab_channel=ADPBTemploCentral"} //simula um array dinamico
+	sliceSites = append(sliceSites, "qq")
+	fmt.Println("quantidade de itens", len(sliceSites))
+	fmt.Println("capacidade", cap(sliceSites))
+
 	site := "https://www.youtube.com/watch?v=ipHf-wprgoQ&ab_channel=ADPBTemploCentral"
 	res, _ := http.Get(site)
 	fmt.Println("res::  ", res.StatusCode)
 	// fmt.Println("error  ::", error)
+
+	for i := 0; i < 5; i++ {
+		for i, v := range sliceSites {
+			fmt.Println(i, v)
+		}
+		time.Sleep(monitoramento * time.Second)
+	}
+
 }
 
 func doisReturn() (string, int) {
