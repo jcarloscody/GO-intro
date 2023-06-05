@@ -9,12 +9,13 @@ import "time"
 const monitoramento = 5
 
 func main() {
-	for {
-		home()
-		comando := leCom()
-		controler(comando)
-		requisicao()
-	}
+	lerFile()
+	// for {
+	// 	home()
+	// 	comando := leCom()
+	// 	controler(comando)
+	// 	requisicao()
+	// }
 
 }
 
@@ -81,4 +82,10 @@ func requisicao() {
 
 func doisReturn() (string, int) {
 	return "ola", 0
+}
+
+func lerFile() []string {
+	arquivo, _ := os.Open("sites.txt")
+	fmt.Println(arquivo)
+	return []string{}
 }
