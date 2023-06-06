@@ -6,6 +6,12 @@ import "os"
 import "net/http"
 import "time"
 
+import "io"
+import "io/ioutil"
+import "bufio"
+import "strings"
+import "strconv"
+
 const monitoramento = 5
 
 func main() {
@@ -86,6 +92,26 @@ func doisReturn() (string, int) {
 
 func lerFile() []string {
 	arquivo, _ := os.Open("sites.txt")
-	fmt.Println(arquivo)
+	reader := bufio.NewReader(arquivo)
+	for {
+		l, e := reader.ReadString('\n')
+		l = strings.TrimSpace(l)
+		fmt.Println(l)
+		if e == io.EOF {
+			break
+		}
+	}
+	arquivo.Close()
+
+	arquivoioutil, _ := ioutil.ReadFile("sites.txt")
+	fmt.Println(string(arquivoioutil))
+
+	log, _ := os.OpenFile("log.txt", os.O_CREATE|os.O_CREATE|os.O_APPEND, 0666)
+	log.WriteString("ola" + strconv.FormatBool(true) + time.Now().Local().String() + time.Now().Format("02/01/2006 15:04:05"))
+	log.Close()
+
+	arquivoioutil2, _ := ioutil.ReadFile("log.txt")
+	fmt.Println(string(arquivoioutil2))
+
 	return []string{}
 }
